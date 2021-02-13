@@ -1,0 +1,103 @@
+button{
+    margin-right: 5px;
+    background-color: #e0e0e0;
+}
+
+.banner{
+    display: flex;
+    justify-content: space-between;
+}
+
+.game-logo{
+    max-height: 16%;
+    max-width: 30%;
+    flex-grow: 1;
+}
+
+.codeArea{
+    flex-grow: 4;
+    border: 1px solid #333;
+    font-size: 3vmin;
+    background: #ffff;
+    width: 90%;
+    display: flex;
+}
+
+.text_input{
+    min-height: 100%;
+    width: 100%;
+    flex-grow: 10;
+    resize: none;
+    font: inherit;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+}
+
+.resultArea{
+    flex-grow: 2;
+    display: flex;
+    width: 90%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    max-height: 240px;
+}
+
+.banner-right{
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.clock{
+    font-size: 8vmin;
+}
+
+.gutter{
+    height: 100%;
+    width: 48px;
+    background: #f0f0f0;
+}
+
+.gutter-cell{
+    height: 28px;
+    width: 48px;
+    padding-right: 13px;
+    padding-left: 19px;
+    font: inherit;
+    padding-top: 2px;
+}
+
+.output{
+    background: #ffff;
+    display: block;
+    min-width: 65%;
+    min-height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex-grow: 2;
+    font-size: 3vh;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+}
+
+.go{
+    flex-grow: 1;
+    width: 100%;
+    font-size: 8vmin;
+    margin-right: 40px;
+    background-color: #e0e0e0;
+    font-family: 'Roboto Condensed';
+}
+
+.good{
+    background-color: #cfc;
+}
+
+.success{
+    background-color: #B8860B;
+    color: #fff;
+}
+
+.error{
+    background-color: #cc0000;
+    color: #fff;
+}

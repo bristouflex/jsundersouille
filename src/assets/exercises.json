@@ -1,0 +1,59 @@
+{
+    "exercises": [
+      {
+        "name": "doubleInteger",
+        "content": "function doubleInteger(i){\n\n      // i will be an integer. Double it and return it.\n\n\n     return i;\n}",
+        "testCases":[
+          {"case": 2, "expected": 4},
+          {"case": 4, "expected": 8},
+          {"case": -10, "expected": -20},
+          {"case": 0, "expected": 0},
+          {"case": 100, "expected": 200}
+        ]
+      },
+      {
+        "name": "isNumberEven",
+        "content": "function isNumberEven(i) {\n    // i will be an integer. Return true if it's even, and false if it isn't.\n\n\n\n}",
+        "testCases":[
+          {"case": 2, "expected": true},
+          {"case": 3, "expected": false},
+          {"case": 0, "expected": true},
+          {"case": -2, "expected": true}
+        ]
+      },
+      {
+        "name": "getFileExtension",
+        "content": "function getFileExtension(i) {\n  // i will be a string, but it may not have a file extension.\n     // return the file extension (with no period) if it has one, otherwise false\n\n\n}",
+        "testCases":[
+          {"case": "\"blatherskite.png\"", "expected": "png"},
+          {"case": "\"perfectlylegal.torrent\"", "expected": "torrent"},
+          {"case": "\"spaces are fine in file names.txt\"", "expected": "txt"},
+          {"case": "\"this does not have one\"", "expected": false},
+          {"case": "\".htaccess\"", "expected": "htaccess"}
+        ]
+      },
+      {
+        "name": "longestString",
+        "content": "function longestString(i) {\n  // i will be an array.\n     // return the longest string in the array\n\n\n}",
+        "testCases":[
+          {"case": "['a','ab','abc']", "expected": "abc"},
+          {"case": "['big',[0,1,2,3,4],'tiny']", "expected": "tiny"},
+          {"case": "['Hi','World','你好']", "expected": "World"},
+          {"case": "[true,false,'lol']", "expected": "lol"},
+          {"case": "[{object: true,mainly: 'to confuse you'},'x']", "expected": "x"}
+        ]
+      },
+      {
+        "name": "arraySum",
+        "content": "function arraySum(i) {\n  // i will be an array, containing integers, strings and/or arrays like itself.\n  // Sum all the integers you find, anywhere in the nest of arrays.\n\n\n}",
+        "testCases":[
+          {"case": "[1,2,3,4,5]", "expected": 15},
+          {"case": "[[1,2,3],4,5]", "expected": 15},
+          {"case": "[[1,2,false],'4','5']", "expected": 3},
+          {"case": "[[[[[[[[[[1]]]]]]]]], 1]", "expected": 2}
+        ]
+      }
+
+    ],
+    "total": 5
+  }
