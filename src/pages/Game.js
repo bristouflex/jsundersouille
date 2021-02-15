@@ -1,38 +1,33 @@
 import "../styles/Game.css";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Banner from "../components/Banner";
-import Log from "../components/Log";
+import CodeArea from "../components/CodeArea";
+import ResultArea from "../components/ResultArea";
 import Interpreter from "js-interpreter";
-import { getExercise, getTotal } from "../helpers";
+import { getExercise } from "../helpers";
 
 function Game(props) {
-	const [lineCount, setLineCount] = useState(1);
 	const [code, setCode] = useState("");
 	const [minutes, setMinutes] = useState(0);
 	const [seconds, setSeconds] = useState(0);
 	const [pause, setPause] = useState(false);
+	const [lineCount, setLineCount] = useState(1);
 	const [currentExercise, setCurrentExercise] = useState({});
 	const [currentExerciseNb, setCurrentExerciseNb] = useState(1);
 	const [logList, setLogList] = useState([]);
     const [finished, setFinished] = useState(false);
-    const [loopError, setLoopError] = useState(false);
-    let logEnd;
+    const logEnd = useRef();
 
-	const go = async () => {
+	const go = () => {
 		setPause(!pause);
 		let error = false;
         let tmp = logList;
         try{
             for (let testCases of currentExercise.testCases) {
                 let test = code;
-                setLoopError(false)
                 let interpreter = new Interpreter(test);
                 interpreter.appendCode(currentExercise.name + "(" + testCases.case + ");")
-                setTimeout(() => {
-                    setLoopError(true)
-                    console.log("Timeuot!!!");
-                  }, 1000);
-                const [value, infiniteLoop] = await safeLaunch(interpreter)
+                const [value, infiniteLoop] = safeLaunch(interpreter)
                 tmp.push({children: 'Testing "' + currentExercise.name + "(" + testCases.case + ');"...',type: "normal" })
                 setLogList(tmp);
                 if (value === testCases.expected){
@@ -62,90 +57,18 @@ function Game(props) {
         }
 	}
 
-    const safeLaunch = async (myInterpreter) => { 
-        if (myInterpreter.step()) {
-            if(loopError){
-                console.log("here")
+    const safeLaunch = (myInterpreter) => { 
+		let count = 0;
+        while (myInterpreter.step()) {
+            if(count > 1000){
                 return [myInterpreter.value, true]
             }
-            var promise = new Promise(function(resolve, reject) {
-                console.log("heure", loopError)
-                let time = setTimeout(() =>  
-                {
-                    resolve( safeLaunch(myInterpreter))
-                }
-                , 0);
-                
-            });
-            return promise;
+			count += 1;
             
-        }else{
-            console.log("hure")
-            return [myInterpreter.value, false]
-        } 
-    }
-
-    const nextExercise = () => {
-        if(getTotal() === currentExerciseNb) alert("fini!")
-        else{
-            setCurrentExerciseNb(currentExerciseNb+1)
-            setPause(false)
-            setLogList([])
-            setFinished(false)
         }
+        return [myInterpreter.value, false] 
     }
 
-    const handleClickButton = () => {
-        if(finished) nextExercise()
-        else go()
-    }
-
-	const handleKeyUp = (e) => {
-		if (e.key == "Tab") {
-			e.preventDefault();
-		}
-		if (e.key == "Enter") {
-			setLineCount(lineCount + 1);
-		}
-		if (e.key == "Backspace") {
-			let lines = code.split("\n");
-			setLineCount(lines.length);
-		}
-	};
-
-	const handleKeyDown = (e) => {
-		if (e.key == "Tab") {
-			e.preventDefault();
-		}
-	};
-
-	const handleChange = (e) => {
-		setCode(e.target.value);
-	};
-
-	const lineShow = () => {
-		let arrayNumbers = [];
-		for (let i = 1; i < lineCount + 1; i++) arrayNumbers.push(i);
-		return (
-			<div className="gutter">
-				{arrayNumbers.map((nb) => (
-					<div key={nb} className="gutter-cell">
-						{nb}
-					</div>
-				))}
-			</div>
-		);
-	};
-
-	const logShow = () => {
-		return (
-			<div className="output" ref={(el) => {logEnd = el;}}>
-				{logList.map((log, index) => {
-					return <Log key={index+"log"} type={log.type}>{log.children}</Log>;
-				})}
-			</div>
-		);
-	};
 
     const scrollToBottom = () => {
         if(logEnd && logEnd.scrollIntoView)
@@ -177,21 +100,23 @@ function Game(props) {
 				setSeconds={setSeconds}
 				pause={pause}
 			/>
-			<div className="codeArea">
-				{lineShow()}
-				<textarea
-					onChange={handleChange}
-					value={code}
-					className="text_input"
-					onKeyUp={handleKeyUp}
-					onKeyDown={handleKeyDown}></textarea>
-			</div>
-			<div className="resultArea">
-				<button className="go" onClick={handleClickButton}>
-					Go
-				</button>
-                {logShow()}
-			</div>
+			<CodeArea 
+				code={code}
+				setCode={setCode}
+				lineCount={lineCount}
+				setLineCount={setLineCount}
+			/>
+			<ResultArea
+				finished={finished}
+				logEnd={logEnd}
+				logList={logList}
+				go={go}
+				currentExerciseNb={currentExerciseNb}
+				setFinished={setFinished}
+				setCurrentExerciseNb={setCurrentExerciseNb}
+				setPause={setPause}
+				setLogList={setLogList}
+			/>
 		</div>
 	);
 }
