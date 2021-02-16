@@ -53,13 +53,12 @@ button{
 }
 
 .gutter{
-    height: 100%;
     width: 48px;
     background: #f0f0f0;
 }
 
 .gutter-cell{
-    height: 30px;
+    height: 28px;
     width: 48px;
     padding-right: 13px;
     padding-left: 19px;
