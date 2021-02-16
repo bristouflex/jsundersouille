@@ -15,7 +15,7 @@ function Game(props) {
 	const [pause, setPause] = useState(false);
 	const [lineCount, setLineCount] = useState(1);
 	const [currentExercise, setCurrentExercise] = useState({});
-	const [currentExerciseNb, setCurrentExerciseNb] = useState(6);
+	const [currentExerciseNb, setCurrentExerciseNb] = useState(1);
 	const [logList, setLogList] = useState([]);
     const [finished, setFinished] = useState(false);
     
