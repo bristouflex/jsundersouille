@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import logo from "../assets/youcant.png";
 
 export default function Banner({minutes, seconds, pause, setMinutes, setSeconds}) {
@@ -32,8 +32,8 @@ export default function Banner({minutes, seconds, pause, setMinutes, setSeconds}
 					{minutes}:{seconds / 10 >= 1 ? seconds : "0" + seconds}
 				</span>
 				<div>
-					<button>Tweet your progess</button>
-					<button>Share on Facebook</button>
+					<button className="btn_banner">Tweet your progess</button>
+					<button className="btn_banner">Share on Facebook</button>
 				</div>
 			</div>
 		</div>

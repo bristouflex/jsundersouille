@@ -1,6 +1,6 @@
 import React, {useRef} from 'react';
 
-function CodeArea({code, setCode, lineCount, setLineCount}) {
+function CodeArea({code, setCode, lineCount, setLineCount, pause}) {
     const textAreaCode = useRef() 
 
 	const lineShow = () => {
@@ -18,6 +18,7 @@ function CodeArea({code, setCode, lineCount, setLineCount}) {
 	};
 
 	const handleChange = (e) => {
+		if(!pause)
 		setCode(e.target.value);
 	};
 

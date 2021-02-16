@@ -59,12 +59,13 @@ button{
 }
 
 .gutter-cell{
-    height: 28px;
+    height: 30px;
     width: 48px;
     padding-right: 13px;
     padding-left: 19px;
     font: inherit;
     padding-top: 2px;
+    color: #333;
 }
 
 .output{

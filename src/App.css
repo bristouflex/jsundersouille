@@ -27,3 +27,8 @@
   padding: 2vmin;
   background-color: #e0e0e0;
 }
+
+.btn_banner{
+  font-size: 2vmin;
+  font-family: 'Roboto Condensed';
+}

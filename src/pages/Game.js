@@ -1,10 +1,12 @@
 import "../styles/Game.css";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
+import Interpreter from "js-interpreter";
+import { getExercise, getTotal } from "../helpers";
+import { useHistory } from "react-router-dom";
+
 import Banner from "../components/Banner";
 import CodeArea from "../components/CodeArea";
 import ResultArea from "../components/ResultArea";
-import Interpreter from "js-interpreter";
-import { getExercise } from "../helpers";
 
 function Game(props) {
 	const [code, setCode] = useState("");
@@ -16,7 +18,8 @@ function Game(props) {
 	const [currentExerciseNb, setCurrentExerciseNb] = useState(1);
 	const [logList, setLogList] = useState([]);
     const [finished, setFinished] = useState(false);
-    const logEnd = useRef();
+    
+	const history = useHistory();
 
 	const go = () => {
 		setPause(!pause);
@@ -54,9 +57,28 @@ function Game(props) {
             const secondMessage = seconds / 10 >= 1 ? seconds : "0" + seconds;
             setLogList([...logList,{ children:"SUCCESS! All tests passed. You've used " +minutes +":" +secondMessage +" so far. Well done!\nClick Go or hit Ctrl-Enter/⌘-Enter to move on to level " +currentExerciseNb +1 +"!", type: "success",} ]);
             setFinished(true);
+            if(getTotal() === currentExerciseNb) endgame()
         }
 	}
 
+    const endgame = () => {
+        history.push({pathname:"/victory", state: {minutes: minutes, seconds: seconds}})
+    }
+
+    const nextExercise = () => {
+        setCurrentExerciseNb(currentExerciseNb+1);
+        setPause(false);
+        setLogList([]);
+        setFinished(false);
+        
+    }
+
+    const handleClickButton = () => {
+        if(finished) nextExercise()
+        else go()
+    }
+
+	
     const safeLaunch = (myInterpreter) => { 
 		let count = 0;
         while (myInterpreter.step()) {
@@ -70,18 +92,13 @@ function Game(props) {
     }
 
 
-    const scrollToBottom = () => {
-        if(logEnd && logEnd.scrollIntoView)
-        logEnd.scrollIntoView({ behavior: "smooth" });
-    }
+    
 
 	useEffect(() => {
 		setCurrentExercise(getExercise(currentExerciseNb));
 	}, [currentExerciseNb]);
 
-	useEffect(() => {
-		scrollToBottom()
-	}, [logList]);
+	
 
 	useEffect(() => {
 		setCode(currentExercise.content);
@@ -105,17 +122,11 @@ function Game(props) {
 				setCode={setCode}
 				lineCount={lineCount}
 				setLineCount={setLineCount}
+				pause={pause}
 			/>
-			<ResultArea
-				finished={finished}
-				logEnd={logEnd}
+			<ResultArea				
 				logList={logList}
-				go={go}
-				currentExerciseNb={currentExerciseNb}
-				setFinished={setFinished}
-				setCurrentExerciseNb={setCurrentExerciseNb}
-				setPause={setPause}
-				setLogList={setLogList}
+				handleClickButton={handleClickButton}
 			/>
 		</div>
 	);

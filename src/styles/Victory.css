@@ -1,0 +1,72 @@
+@keyframes blink {
+    0% {
+        background-color: khaki;
+    }
+
+    33% {
+        background-color: cyan;
+    }
+
+    66% {
+        background-color: plum;
+    }
+
+    100% {
+        background-color: royalblue;
+    }
+}
+
+@-webkit-keyframes blink {
+    0% {
+        background-color: khaki;
+    }
+
+    33% {
+        background-color: cyan;
+    }
+
+    66% {
+        background-color: plum;
+    }
+
+    100% {
+        background-color: royalblue;
+    }
+}
+
+.victory{
+    animation: blink 0.5s infinite;
+    -webkit-animation: blink 0.75s infinite;
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    flex-direction: column;
+    background-attachment: fixed;
+    font: 5vmin 'Roboto Condensed';
+}
+
+.successImage{
+    margin-left: 5%;
+}
+
+.victory_message{
+    margin-left: 5%;
+    
+}
+
+.buttons_share{
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+}
+
+.share{
+    font-family: 'Roboto Condensed';
+    display: block;
+    padding: 5% 5%;
+    margin-top: 3%;
+    font-size: 5vmin;
+    width: 460px;
+    margin-bottom: 4%;
+}

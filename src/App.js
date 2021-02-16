@@ -6,6 +6,7 @@ import {
   Route,
 } from "react-router-dom";
 import Game from "./pages/Game";
+import Victory from "./pages/Victory";
 
 function App() {
   return (
@@ -13,6 +14,9 @@ function App() {
       <Switch>
         <Route path="/game">
           <Game />
+        </Route>
+        <Route path="/victory">
+          <Victory />
         </Route>
         <Route path="/">
           <HomePage />

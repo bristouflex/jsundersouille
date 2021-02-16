@@ -1,42 +1,31 @@
 import React, { useEffect } from 'react';
 import Log from "../components/Log";
-import { getTotal } from "../helpers";
+import { animateScroll } from "react-scroll"
 
-function ResultArea({finished, logEnd, logList, go, currentExerciseNb, setPause, setLogList, setFinished, setCurrentExerciseNb}) {
+
+function ResultArea( { logList, handleClickButton}) {
+
+
+	const scrollToBottom = () => {
+        animateScroll.scrollToBottom({
+			containerId: "logEnd"
+		});
+    }
+
+    useEffect(() => {
+		
+		scrollToBottom()
+	}, [logList]);
 
     const logShow = () => {
 		return (
-			<div className="output" ref={logEnd}>
+			<div className="output" id="logEnd">
 				{logList.map((log, index) => {
 					return <Log key={index+"log"} type={log.type}>{log.children}</Log>;
 				})}
 			</div>
 		);
 	};
-
-    const nextExercise = () => {
-        if(getTotal() === currentExerciseNb) alert("fini!")
-        else{
-            setCurrentExerciseNb(currentExerciseNb+1)
-            setPause(false)
-            setLogList([])
-            setFinished(false)
-        }
-    }
-
-    const handleClickButton = () => {
-        if(finished) nextExercise()
-        else go()
-    }
-
-    const scrollToBottom = () => {
-        if(logEnd && logEnd.scrollIntoView)
-        logEnd.scrollIntoView({ behavior: "smooth" });
-    }
-
-    useEffect(() => {
-		scrollToBottom()
-	}, [logList]);
 
     return (
         <div className="resultArea">

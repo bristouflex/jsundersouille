@@ -6,7 +6,7 @@ const getExercise = (number) => {
 }
 
 const getTotal = () => {
-    return data.default.total;
+    return data.default.exercises.length;
 }
 
 
