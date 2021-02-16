@@ -2,14 +2,15 @@
     "exercises": [
       {
         "name": "doubleInteger",
-        "content": "function doubleInteger(i){\n\n      // i will be an integer. Double it and return it.\n\n\n     return i;\n}",
+        "content": "function doubleInteger(i){\n\n    // i will be an integer. Double it and return it.\n\n\n    return i;\n}",
         "testCases":[
           {"case": 2, "expected": 4},
           {"case": 4, "expected": 8},
           {"case": -10, "expected": -20},
           {"case": 0, "expected": 0},
           {"case": 100, "expected": 200}
-        ]
+        ],
+        "description": "Code as fast as you can! You need to double the integer and return it.\nTo test your code, click Go or hit Ctrl-Enter/⌘-Enter."
       },
       {
         "name": "isNumberEven",
@@ -19,7 +20,8 @@
           {"case": 3, "expected": false},
           {"case": 0, "expected": true},
           {"case": -2, "expected": true}
-        ]
+        ],
+        "description": "Little bit trickier now. The clock's started ticking again. Return true or false depending on whether the number is even.\nYou can use console.log() and alert(); the results will show up here."
       },
       {
         "name": "getFileExtension",
@@ -30,7 +32,8 @@
           {"case": "\"spaces are fine in file names.txt\"", "expected": "txt"},
           {"case": "\"this does not have one\"", "expected": false},
           {"case": "\".htaccess\"", "expected": "htaccess"}
-        ]
+        ],
+        "description": "Here we go! Given a filename in a string (like 'test.jpg'), return the file extension (like 'jpg'), OR false if it doesn't have one."
       },
       {
         "name": "longestString",
@@ -41,7 +44,9 @@
           {"case": "['Hi','World','你好']", "expected": "World"},
           {"case": "[true,false,'lol']", "expected": "lol"},
           {"case": "[{object: true,mainly: 'to confuse you'},'x']", "expected": "x"}
-        ]
+        ],
+        "description": "Level 4 ! You'll get an array. Return the longest string inside it."
+
       },
       {
         "name": "arraySum",
@@ -51,7 +56,21 @@
           {"case": "[[1,2,3],4,5]", "expected": 15},
           {"case": "[[1,2,false],'4','5']", "expected": 3},
           {"case": "[[[[[[[[[[1]]]]]]]]], 1]", "expected": 2}
-        ]
+        ],
+        "description": "Final challenge! Sum all the integers in a nested array, no matter how many levels deep."
+
+      },
+      {
+        "name": "isPrimeNumber",
+        "content": "function isPrimeNumber(i) {\n    // i will be a number, return whether i is a prime number or not\n\n    }",
+        "testCases":[
+          {"case": "2", "expected": true},
+          {"case": "66", "expected": false},
+          {"case": "125", "expected": false},
+          {"case": "137", "expected": true}
+        ],
+        "description": "You really thought that... AHAHA!"
+
       }
 
     ]

@@ -15,7 +15,7 @@ function Game(props) {
 	const [pause, setPause] = useState(false);
 	const [lineCount, setLineCount] = useState(1);
 	const [currentExercise, setCurrentExercise] = useState({});
-	const [currentExerciseNb, setCurrentExerciseNb] = useState(1);
+	const [currentExerciseNb, setCurrentExerciseNb] = useState(6);
 	const [logList, setLogList] = useState([]);
     const [finished, setFinished] = useState(false);
     
@@ -51,6 +51,7 @@ function Game(props) {
         }catch(err){
             error = true;
             console.log(err)
+            setPause(false);
             tmp.push({ children: "ERROR: "+err.message, type: "error" })
         }
         if (!error) {
@@ -77,12 +78,11 @@ function Game(props) {
         if(finished) nextExercise()
         else go()
     }
-
 	
     const safeLaunch = (myInterpreter) => { 
 		let count = 0;
         while (myInterpreter.step()) {
-            if(count > 1000){
+            if(count > 10000){
                 return [myInterpreter.value, true]
             }
 			count += 1;
@@ -90,21 +90,20 @@ function Game(props) {
         }
         return [myInterpreter.value, false] 
     }
-
-
-    
+   
 
 	useEffect(() => {
 		setCurrentExercise(getExercise(currentExerciseNb));
 	}, [currentExerciseNb]);
 
-	
 
 	useEffect(() => {
 		setCode(currentExercise.content);
 		if (currentExercise.content !== undefined) {
 			let lines = currentExercise.content.split("\n");
 			setLineCount(lines.length);
+            setLogList([{children: currentExercise.description ,type: "good" }])
+
 		}
 	}, [currentExercise]);
 

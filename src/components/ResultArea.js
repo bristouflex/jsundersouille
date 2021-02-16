@@ -29,7 +29,7 @@ function ResultArea( { logList, handleClickButton}) {
 
     return (
         <div className="resultArea">
-				<button className="go" onClick={handleClickButton}>
+				<button className="go" aria-label="go" onClick={handleClickButton}>
 					Go
 				</button>
                 {logShow()}
